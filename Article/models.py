@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import F
 
 
 class Article(models.Model):
@@ -13,3 +14,7 @@ class Article(models.Model):
 
     class Meta:
         db_table = 'article'
+
+    def increasingViews(self):  # 조회수 증가
+        self.views = F('views') + 1
+        self.save()
