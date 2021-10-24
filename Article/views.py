@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -11,14 +10,14 @@ from Article.serializers import GetArticleSerializer, CreateUpdateArticleSeriali
 class ArticleViewSet(viewsets.ModelViewSet):
     queryset = Article.objects.all()
 
-    def get_serializer_class(self):
+    def get_serializer_class(self):  # request method에 따라 다른 Serializer 적용
         if self.request.method == 'GET':
             return GetArticleSerializer
-        elif self.request.method == 'POST' or 'UPDATE':
+        elif self.request.method == 'POST' or 'UPDATE' or 'PATCH':
             return CreateUpdateArticleSerializer
 
-    def get_permissions(self):
-        if self.action == 'update' or 'partial_update' or 'destroy':
+    def get_permissions(self):  # request method에 따라 다른 Permission 적용
+        if self.request.method == 'UPDATE' or 'PATCH' or 'DELETE':
             permission_classes = [IsOwner]
         else:
             permission_classes = [IsAuthenticated]
@@ -41,6 +40,10 @@ class ArticleViewSet(viewsets.ModelViewSet):
         )
 
     """
+    GET /article/ - 전체 글 확인 (LimitOffsetPagination 적용) : 기존 ModelViewSet의 ListModelMixin 사용 (변경X)
+    """
+
+    """
     GET /article/<int:pk>/ - 특정 글 확인
     """
 
@@ -60,9 +63,9 @@ class ArticleViewSet(viewsets.ModelViewSet):
             return False
 
     """
-    UPDATE /article/<int:pk>/ - 특정 글 수정
+    UPDATE /article/<int:pk>/ - 특정 글 수정 : 기존 ModelViewSet의 UpdateModelMixin 사용 (변경X)
     """
 
     """
-    DELETE /article/<int:pk>/ - 특정 글 삭제 
+    DELETE /article/<int:pk>/ - 특정 글 삭제 : 기존 ModelViewSet의 DestroyModelMixin 사용 (변경X)
     """
