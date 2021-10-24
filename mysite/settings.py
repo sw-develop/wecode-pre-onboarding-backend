@@ -61,6 +61,9 @@ REST_USE_JWT = True  # enable JWT authentication in dj-rest-auth.
 ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
+OLD_PASSWORD_FIELD_ENABLED = True  # to use old_password
+LOGOUT_ON_PASSWORD_CHANGE = False  # to keep the user logged in after password change
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
