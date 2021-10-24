@@ -18,3 +18,4 @@ class Article(models.Model):
     def increasingViews(self):  # 조회수 증가
         self.views = F('views') + 1
         self.save()
+        self.refresh_from_db()
