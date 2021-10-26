@@ -1,5 +1,5 @@
 from rest_framework import viewsets, status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 
 from Article.models import Article
@@ -17,10 +17,10 @@ class ArticleViewSet(viewsets.ModelViewSet):
             return CreateUpdateArticleSerializer
 
     def get_permissions(self):  # request method에 따라 다른 Permission 적용
-        if self.request.method == 'UPDATE' or 'PATCH' or 'DELETE':
-            permission_classes = [IsOwner]
+        if self.request.method == 'GET':
+            permission_classes = [AllowAny]
         else:
-            permission_classes = [IsAuthenticated]
+            permission_classes = [IsOwner]
         return [permission() for permission in permission_classes]
 
     """
