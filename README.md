@@ -49,6 +49,9 @@ git clone https://github.com/sw-develop/wecode-pre-onboarding-backend.git
 
 # 필요 패키지 다운로드
 pip install -r requirements.txt
+
+# 로컬에서 실행
+python manage.py runserver 0.0.0.0:8000
 ```
 
 ## PART1. 회원가입/로그인/로그아웃
