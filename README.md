@@ -670,4 +670,4 @@ Body
 ~~~
 설명: 게시물 삭제는 로그인한 사용자 & 본인 게시물인 경우에만 가능하므로 위의 문구와 함께 401 Unauthorized가 발생합니다.   
 
-[Postman API Docs](!https://documenter.getpostman.com/view/12950398/UV5cAFtM#e88d594d-95f2-4529-92e4-d70f3e7293f4)   
+[Postman API Docs](https://documenter.getpostman.com/view/12950398/UV5cAFtM#e88d594d-95f2-4529-92e4-d70f3e7293f4)   
