@@ -42,6 +42,15 @@ djangorestframework-simplejwt
     
 ---
 # 2. 자세한 실행 방법 및 API 명세    
+### 전체 프로젝트 실행 방법   
+```
+# git clone을 통해 프로젝트 코드 다운로드
+git clone https://github.com/sw-develop/wecode-pre-onboarding-backend.git
+
+# 필요 패키지 다운로드
+pip install -r requirements.txt
+```
+
 ## PART1. 회원가입/로그인/로그아웃
 ### A. 회원가입
 ~~~Bash
