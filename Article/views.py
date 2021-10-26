@@ -50,17 +50,19 @@ class ArticleViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
 
-        if self.isAuthorOfArticle(request, instance) is False:  # 작성자가 아닌 다른 사람이 확인한 경우에만 조회수 증가
+        if self.isAuthorOfArticleOrAnonymousUser(request, instance) is False:  # 작성자가 아닌 로그인한 다른 사람이 확인한 경우에만 조회수 증가
             instance.increasingViews()
 
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
 
-    def isAuthorOfArticle(self, request, instance):
-        if instance.user == request.user:
-            return True
-        else:
-            return False
+    def isAuthorOfArticleOrAnonymousUser(self, request, instance):
+        if request.user.is_authenticated:  # 로그인한 사용자
+            if instance.user == request.user:
+                return True
+            else:
+                return False
+        return True  # Anonymous User
 
     """
     UPDATE /article/<int:pk>/ - 특정 글 수정 : 기존 ModelViewSet의 UpdateModelMixin 사용 (변경X)
